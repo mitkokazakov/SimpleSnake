@@ -27,16 +27,19 @@ namespace SnakeTest
             Food food = new Food();
             food.CreateFood();
 
+            Directions directions = null;
+            Coordinates nextDirection = new Coordinates(0,1);
+
             while (true)
             {
+                if (Console.KeyAvailable) {
+                    ConsoleKeyInfo insertDirection = Console.ReadKey();
 
-                ConsoleKeyInfo insertDirection = Console.ReadKey();
+                    directions = new Directions(insertDirection);
 
-                Directions directions = new Directions(insertDirection);
-
-                //Determine the next position of the snake's head
-                Coordinates nextDirection = directions.GetNextPosition();
-
+                    //Determine the next position of the snake's head
+                    nextDirection = directions.GetNextPosition();
+                }
                 Coordinates snakeHead = snakeElements.Last();
 
                 Coordinates snakeNewHead = new Coordinates(snakeHead.Row + nextDirection.Row, snakeHead.Col + nextDirection.Col);
@@ -83,6 +86,7 @@ namespace SnakeTest
                 }
 
 
+                Thread.Sleep(50);
                 //Console.Clear();
 
                 //foreach (Coordinates element in snakeElements)
