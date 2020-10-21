@@ -11,6 +11,11 @@ namespace SnakeTest
         {
             Console.BufferHeight = Console.WindowHeight;
             Queue<Coordinates> snakeElements = new Queue<Coordinates>();
+            Frame frame = new Frame(4,4);
+            frame.DrawFrame();
+
+            int playerPoints = 0;
+            string outputMessageForPoints = String.Empty;
 
 
             for (int i = 0; i < 5; i++)
@@ -40,19 +45,17 @@ namespace SnakeTest
                     //Determine the next position of the snake's head
                     nextDirection = directions.GetNextPosition();
                 }
-                Coordinates snakeHead = snakeElements.Last();
 
+                Coordinates snakeHead = snakeElements.Last();
                 Coordinates snakeNewHead = new Coordinates(snakeHead.Row + nextDirection.Row, snakeHead.Col + nextDirection.Col);
                 snakeElements.Enqueue(snakeNewHead);
-
-                //Console.SetCursorPosition(snakeNewHead.Col, snakeNewHead.Row);
-                //Console.Write('#');
 
                 //Check if the snakae goes out of boundary
                 if (snakeNewHead.Row < 0 || snakeNewHead.Row >= Console.WindowHeight || snakeNewHead.Col < 0 || snakeNewHead.Col >= Console.WindowWidth)
                 {
                     Console.SetCursorPosition(0, 0);
                     Console.WriteLine("GAME OVER!!!");
+                    Console.WriteLine(outputMessageForPoints + playerPoints);
                     return;
                 }
 
@@ -62,6 +65,7 @@ namespace SnakeTest
                 {
                     Console.SetCursorPosition(0, 0);
                     Console.WriteLine("GAME OVER!!!");
+                    Console.WriteLine(outputMessageForPoints + playerPoints);
                     return;
                 }
 
@@ -76,6 +80,7 @@ namespace SnakeTest
                     //If the snake is fed we set new coordinates of the food through the constructor of Food()
                     food = new Food();
                     food.CreateFood();
+                    playerPoints += 10;
                 }
                 else
                 {
@@ -85,20 +90,8 @@ namespace SnakeTest
                     Console.Write(' ');
                 }
 
-
-                Thread.Sleep(50);
-                //Console.Clear();
-
-                //foreach (Coordinates element in snakeElements)
-                //{
-                //    Console.SetCursorPosition(element.Col, element.Row);
-                //    Console.Write('#');
-                //}
-
-
-                //food.CreateFood();
-
-
+                Thread.Sleep(100);
+                
             }
 
         }
