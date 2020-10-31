@@ -24,6 +24,14 @@ namespace SnakeTest
 
         public int Y { get; private set; }
 
+        public int Lenght => lenght;
+
+        public int Height => height;
+
+        public int Col => this.x;
+
+        public int Row => this.y;
+
         public void DrawTopHorizontalLine()
         {
             Console.SetCursorPosition(this.Y, this.X);
