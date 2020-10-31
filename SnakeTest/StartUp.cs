@@ -29,7 +29,7 @@ namespace SnakeTest
                 Console.Write('#');
             }
 
-            Food food = new Food();
+            Food food = new Food(frame);
             food.CreateFood();
 
             Directions directions = null;
@@ -78,7 +78,7 @@ namespace SnakeTest
                 {
 
                     //If the snake is fed we set new coordinates of the food through the constructor of Food()
-                    food = new Food();
+                    food = new Food(frame);
                     food.CreateFood();
                     playerPoints += 10;
                 }
@@ -90,7 +90,7 @@ namespace SnakeTest
                     Console.Write(' ');
                 }
 
-                Thread.Sleep(100);
+                Thread.Sleep(150);
                 
             }
 
