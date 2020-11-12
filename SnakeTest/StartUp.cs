@@ -20,7 +20,7 @@ namespace SnakeTest
 
             for (int i = 0; i < 5; i++)
             {
-                snakeElements.Enqueue(new Coordinates(0, i));
+                snakeElements.Enqueue(new Coordinates(frame.Row + 1, frame.Col + 2 + i));
             }
 
             foreach (Coordinates element in snakeElements)
@@ -51,11 +51,12 @@ namespace SnakeTest
                 snakeElements.Enqueue(snakeNewHead);
 
                 //Check if the snakae goes out of boundary
-                if (snakeNewHead.Row < 0 || snakeNewHead.Row >= Console.WindowHeight || snakeNewHead.Col < 0 || snakeNewHead.Col >= Console.WindowWidth)
+                if (snakeNewHead.Row < frame.Row || snakeNewHead.Row >= frame.Height + frame.Row || snakeNewHead.Col < frame.Col || snakeNewHead.Col >= frame.Lenght + frame.Col)
                 {
-                    Console.SetCursorPosition(0, 0);
-                    Console.WriteLine("GAME OVER!!!");
-                    Console.WriteLine(outputMessageForPoints + playerPoints);
+                    Console.SetCursorPosition(40, 5);
+                    Console.Write("GAME OVER!!!");
+                    Console.SetCursorPosition(40, 6);
+                    Console.WriteLine($"Your Points: {outputMessageForPoints + playerPoints}");
                     return;
                 }
 
@@ -63,9 +64,10 @@ namespace SnakeTest
                 var snakeWhitoutHead = snakeElements.SkipLast(1);
                 if (snakeWhitoutHead.Any(e => e.Row == snakeNewHead.Row && e.Col == snakeNewHead.Col))
                 {
-                    Console.SetCursorPosition(0, 0);
+                    Console.SetCursorPosition(40, 5);
                     Console.WriteLine("GAME OVER!!!");
-                    Console.WriteLine(outputMessageForPoints + playerPoints);
+                    Console.SetCursorPosition(40, 6);
+                    Console.WriteLine($"Your Points: {outputMessageForPoints + playerPoints}");
                     return;
                 }
 
